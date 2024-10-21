@@ -101,10 +101,24 @@ class CardGame {
         return this.players;
     }
 
-    // playRound(): string {
-    //     // Implementar: Jugar una ronda y determinar el ganador
-    //     return 'ganador';
-    // }
+    playRound(): string {
+        let highestCard: Card | null = null;
+        let winningPlayer: number = -1;
+    
+        this.players.forEach((player, index) => {
+          const playerCard = player.pop(); // Cada jugador juega su última carta
+    if (playerCard) {
+    console.log(`Jugador ${index + 1} juega ${playerCard.value} de ${playerCard.suit}`);
+    if (!highestCard || playerCard.value > highestCard.value) {
+        highestCard = playerCard;
+        winningPlayer = index;
+    }
+    }
+        });
+    
+        return `¡El jugador ${winningPlayer + 1} gana esta ronda con la carta ${highestCard?.value} de ${highestCard?.suit}!`;
+    }
+    
 }
 
 const game = new CardGame(2);
